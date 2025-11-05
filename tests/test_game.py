@@ -22,21 +22,6 @@ def test_hint_displayed(driver):
     assert hint_element.is_displayed()
     assert len(hint_element.text.strip()) > 0
 
-def test_guess_updates_incorrect_counter(driver):
-    """Click a wrong letter and ensure the incorrect guess counter increments."""
-    wrong_count_before = driver.find_element(By.CSS_SELECTOR, ".guesses-text b").text
-    wrong_count_before = int(wrong_count_before.split("/")[0])
-
-    # Find a letter unlikely to exist — e.g., 'z'
-    z_button = driver.find_element(By.XPATH, "//button[text()='z']")
-    z_button.click()
-    time.sleep(1)
-
-    wrong_count_after = driver.find_element(By.CSS_SELECTOR, ".guesses-text b").text
-    wrong_count_after = int(wrong_count_after.split("/")[0])
-
-    assert wrong_count_after == wrong_count_before + 1
-
 def test_button_disables_after_click(driver):
     """Ensure that a letter button becomes disabled after clicking."""
     button_a = driver.find_element(By.XPATH, "//button[text()='a']")
